@@ -1,15 +1,17 @@
 import { CronJob } from 'cron';
 import https from "https";
-
 const job = new CronJob("*/14 * * * *", function () {
+  const url = 'https://yelijochmender-backend.onrender.com/';
+  console.log(`Sending GET request to ${url}...`);
+
   https
-    .get(process.env.API_URL, (res) => {
-      if (res.statusCode === 200) console.log("GET request sent successfully");
-      else console.log("GET request failed", res.statusCode);
+    .get(url, (res) => {
+      console.log(`Status Code: ${res.statusCode}`);
+      res.on('data', d => process.stdout.write(d));
     })
-    .on("error", (e) => console.error("Error while sending request", e));
+    .on("error", (e) => console.error("Error while sending request:", e));
 });
-export default job;
+
 
 // CRON JOB EXPLANATION:
 // Cron jobs are scheduled tasks that run periodically at fixed intervals
