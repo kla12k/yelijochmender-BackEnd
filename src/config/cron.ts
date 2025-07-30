@@ -1,5 +1,6 @@
 import { CronJob } from 'cron';
 import https from "https";
+
 const job = new CronJob("*/14 * * * *", function () {
   const url = 'https://yelijochmender-backend.onrender.com/';
   console.log(`Sending GET request to ${url}...`);
@@ -11,7 +12,7 @@ const job = new CronJob("*/14 * * * *", function () {
     })
     .on("error", (e) => console.error("Error while sending request:", e));
 });
-
+export default job;
 
 // CRON JOB EXPLANATION:
 // Cron jobs are scheduled tasks that run periodically at fixed intervals
