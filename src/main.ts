@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe,Logger } from '@nestjs/common';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import job from './config/cron';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -11,6 +12,8 @@ const logger = new Logger('Bootstrap');
   // Log current working directory for debugging
   console.log('Current working directory:', process.cwd());
   console.log('Static assets path:', join(process.cwd(), 'Uploads'));
+
+job.start(); // Start the cron job
 
   app.useGlobalPipes(
     new ValidationPipe({
