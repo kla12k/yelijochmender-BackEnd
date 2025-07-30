@@ -6,7 +6,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
+const logger = new Logger('Bootstrap');
   const port = process.env.PORT || 3002;
   // Log current working directory for debugging
   console.log('Current working directory:', process.cwd());
